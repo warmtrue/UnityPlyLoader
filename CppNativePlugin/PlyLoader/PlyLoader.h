@@ -4,6 +4,8 @@
 #include <string>
 #include "ml_mesh_type.h"
 
+using namespace std;
+
 class PlyFileObject
 {
 public:
@@ -51,11 +53,12 @@ public:
 	};
 
 	PlyFileObject(const char* fileName);
-	std::vector<float> verts;
-	std::vector<float> norms;
-	std::vector<unsigned char> colors;
-	std::vector<unsigned int> faces;
-	std::vector<float> uvCoords;
+	vector<float> verts;
+	vector<float> norms;
+	vector<unsigned char> colors;
+	vector<unsigned int> faces;
+	vector<float> uvCoords;
+	string textureName;
 	CMeshO cm;
 
 private:
@@ -77,4 +80,6 @@ extern "C" {
 	__declspec(dllexport) unsigned int* GetPlyIndexs(PlyFileObject* plyFile, unsigned int& count);
 
 	__declspec(dllexport) float* GetPlyUvs(PlyFileObject* plyFile, unsigned int& count);
+
+	__declspec(dllexport) const char* GetPlyTextureName(PlyFileObject* plyFile);
 };

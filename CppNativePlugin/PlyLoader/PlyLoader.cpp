@@ -54,6 +54,7 @@ PlyFileObject::PlyFileObject(const char* fileName)
 	colors.clear();
 	uvCoords.clear();
 	faces.clear();
+	textureName.clear();
 
 	for (int i = 0; i < cm.vert.size(); i++)
 	{
@@ -87,6 +88,9 @@ PlyFileObject::PlyFileObject(const char* fileName)
 	for (int i = 0; i < cm.fn; i++)
 		for (int k = 0; k < 3; k++)
 			faces.push_back((unsigned int)(cm.face[i].V(k) - &*cm.vert.begin()));
+
+	if (cm.textures.size() > 0)
+		textureName = cm.textures[0];
 }
 
 void PlyFileObject::Enable(int openingFileMask)
@@ -195,4 +199,12 @@ __declspec(dllexport) float* GetPlyUvs(PlyFileObject* plyFile, unsigned int& cou
 
 	count = (unsigned int)plyFile->uvCoords.size();
 	return plyFile->uvCoords.data();
+}
+
+__declspec(dllexport) const char* GetPlyTextureName(PlyFileObject* plyFile)
+{
+	if (plyFile == NULL || plyFile->cm.textures.size() == 0)
+		return NULL;
+
+	return plyFile->textureName.c_str();
 }

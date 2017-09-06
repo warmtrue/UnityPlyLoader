@@ -1,0 +1,9 @@
+/.vs
+/obj
+/Debug
+/x64
+/Release
+/DTAR_*
+*.sdf
+*.user
+*.opendb
