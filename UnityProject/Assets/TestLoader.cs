@@ -6,7 +6,6 @@ using UnityEngine;
 public class TestLoader : MonoBehaviour
 {
     public string fileName;
-    public Texture modelTextrue;
 
     // Use this for initialization
     void Start()
@@ -22,13 +21,22 @@ public class TestLoader : MonoBehaviour
         mesh.SetIndices(PlyLoaderDll.GetIndexs(plyIntPtr), MeshTopology.Triangles, 0, true);
         mesh.name = "mesh";
 
-        GameObject g = new GameObject();
-        g.name = "meshNew";
-        MeshFilter mf = g.AddComponent<MeshFilter>();
+        GameObject go = new GameObject();
+        go.name = "meshNew";
+        MeshFilter mf = go.AddComponent<MeshFilter>();
         mf.mesh = mesh;
-        MeshRenderer mr = g.AddComponent<MeshRenderer>();
+        MeshRenderer mr = go.AddComponent<MeshRenderer>();
         mr.material = new Material(Shader.Find("Unlit/Texture"));
-        mr.material.mainTexture = modelTextrue;
+        string textureName = PlyLoaderDll.GetTextureName(plyIntPtr);
+        if (textureName.Length > 0)
+        {
+            string texturePath = "file://" + System.IO.Path.Combine(Application.streamingAssetsPath, textureName);
+            WWW www = new WWW(texturePath);
+            while (!www.isDone)
+            {
+            }
+            mr.material.mainTexture = www.texture;
+        }
 
         PlyLoaderDll.UnLoadPly(plyIntPtr);
     }

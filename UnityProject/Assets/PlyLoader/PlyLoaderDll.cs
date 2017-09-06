@@ -27,6 +27,9 @@ public class PlyLoaderDll : MonoBehaviour
     [DllImport("PlyLoader")]
     public static extern IntPtr GetPlyUvs(IntPtr plyIntPtr, out int count);
 
+    [DllImport("PlyLoader")]
+    public static extern IntPtr GetPlyTextureName(IntPtr plyIntPtr);
+
     public static Vector3[] GetVertices(IntPtr plyIntPtr)
     {
         List<Vector3> resultList = new List<Vector3>();
@@ -101,5 +104,10 @@ public class PlyLoaderDll : MonoBehaviour
             resultList.Add(new Vector2(faceuvs[i*2], faceuvs[i*2 + 1]));
 
         return resultList.ToArray();
+    }
+
+    public static string GetTextureName(IntPtr plyIntPtr)
+    {
+        return Marshal.PtrToStringAnsi(GetPlyTextureName(plyIntPtr));
     }
 }
