@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="PlyLoader/PlyLoader.cpp" />
+    <ClCompile Include="vcglib\wrap\ply\plylib.cpp">
+      <Filter>Ply</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlyLoader/ml_mesh_type.h" />
+    <ClInclude Include="PlyLoader/PlyLoader.h" />
+    <ClInclude Include="vcglib\wrap\ply\plylib.h">
+      <Filter>Ply</Filter>
+    </ClInclude>
+    <ClInclude Include="vcglib\wrap\ply\plystuff.h">
+      <Filter>Ply</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Ply">
+      <UniqueIdentifier>{e7d61559-f672-4449-9b1f-617449830707}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
